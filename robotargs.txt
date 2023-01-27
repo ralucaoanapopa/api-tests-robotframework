@@ -1,0 +1,3 @@
+--pythonpath lib
+--pythonpath variables
+--outputdir result
