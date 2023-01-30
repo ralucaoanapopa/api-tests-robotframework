@@ -3,7 +3,7 @@ Resource        variables.robot
 Library         REST
 
 *** Keywords ***
-# ============ List all Keywords ==============
+# ============ Book ==============
 List all books
     ${resp}    GET    ${book_cart_base}/Book
     Set Suite Variable      ${book_id}     ${resp['body'][13]['bookId']}
@@ -15,12 +15,10 @@ List similar books
     [Arguments]    ${id}
     GET    ${book_cart_base}/Book/GetSimilarBooks/${id}
 
-# ============ Read one Keywords ==============
 Read one book
     [Arguments]    ${id}
     GET    ${book_cart_base}/Book/${id}
 
-# ============ Verify responses Keywords ==========
 Verify response book model
     Integer     response body bookId         
     String      response body title
@@ -44,4 +42,15 @@ Verify response list categories
 
 Verify response similar books
     Array        response body                         minItems=5    maxItems=5
-    
+
+# ============ User ==============
+Check user availability
+    [Arguments]    ${username}
+    GET    ${book_cart_base}/User/validateUserName/${username}
+
+Register new user
+    POST    ${book_cart_base}/User    ${user_body}
+
+Get number of items from shopping cart for a user
+    [Arguments]    ${id}
+    GET    ${book_cart_base}/User/${id}
