@@ -31,6 +31,15 @@ pip install --upgrade RESTinstance
 robot -A robotargs.txt -i <tag from test(s)> tests
 ```
 
+# APIs used
+
+## REST
+- [BookCart API](https://bookcart.azurewebsites.net/swagger/index.html)
+
+Obtain token (which is available for 1h):
+- register user on [web app](https://bookcart.azurewebsites.net/)
+- login with user and check response (it contains the token)
+
 # Tools
 
 - [Robot Framework](https://robotframework.org/robotframework/) documentation
