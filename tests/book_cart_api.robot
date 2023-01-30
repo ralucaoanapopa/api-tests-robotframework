@@ -3,6 +3,7 @@ Documentation    Tests for BookCartAPI
 Resource        ../variables.robot
 Resource        ../book_cart_keywords.robot
 Library         REST
+Suite Setup      Setup before running Suite
 Force Tags    book-cart-api
 
 *** Test Cases ***
@@ -26,6 +27,9 @@ GET /Book/{book_id}, 200, when read one book
     Output
     Verify response book model
     Integer     response body bookId           ${book_id}
+    String      response body title            ${book_title}
+    String      response body author           ${book_author}
+    String      response body category         ${book_category}
 
 GET /Book/GetCategoriesList, 200, when list all categories
     [Tags]    book
@@ -63,3 +67,25 @@ GET /User/{user_id}, 200, when read the count of items in the shopping cart
     Get number of items from shopping cart for a user   ${user_id}
     Integer     response status                200
     Integer     response body                  0
+
+GET /Wishlist, 200, when list items from a user's wishlist
+    [Tags]    wishlist
+    List wishlist for a user    ${user_id}
+    Integer     response status                200
+    Array       response body                  minItems=0    maxItems=0
+
+POST /Wishlist/ToggleWishlist/{user_id}/{book_id}, 200, when toggle item (add item)
+    [Tags]    wishlist
+    [Documentation]    Toggle item in order to add to wishlist
+    ...                In case the test passed, execute teardown: 
+    ...                toggle again with same data in order to remove the item from wishlist
+    Toggle item to wishlist    ${user_id}    ${book_id}
+    Output
+    Integer     response status                  200
+    Array       response body                    minItems=1    maxItems=1
+    Integer     response body 0 bookId           ${book_id}
+    String      response body 0 title            ${book_title}
+    String      response body 0 author           ${book_author}
+    String      response body 0 category         ${book_category}
+    [Teardown]    Run Keyword If Test Passed
+    ...    Toggle item to wishlist    ${user_id}    ${book_id}

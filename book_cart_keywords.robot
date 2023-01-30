@@ -4,9 +4,16 @@ Library         REST
 
 *** Keywords ***
 # ============ Book ==============
-List all books
+Setup before running Suite
+    [Documentation]    List all book then set as suite variables a set of book details
     ${resp}    GET    ${book_cart_base}/Book
     Set Suite Variable      ${book_id}     ${resp['body'][13]['bookId']}
+    Set Suite Variable      ${book_title}     ${resp['body'][13]['title']}
+    Set Suite Variable      ${book_author}     ${resp['body'][13]['author']}
+    Set Suite Variable      ${book_category}     ${resp['body'][13]['category']}
+
+List all books
+    ${resp}    GET    ${book_cart_base}/Book
 
 List all categories
     ${resp}    GET    ${book_cart_base}/Book/GetCategoriesList
@@ -54,3 +61,17 @@ Register new user
 Get number of items from shopping cart for a user
     [Arguments]    ${id}
     GET    ${book_cart_base}/User/${id}
+
+# ============ Wishlist ==============
+List wishlist for a user
+    [Arguments]    ${id}
+    GET    ${book_cart_base}/Wishlist/${id}
+
+Toggle item to wishlist
+    [Arguments]    ${user_id}    ${book_id}
+    Set access token in Header    ${token}
+    POST    ${book_cart_base}/Wishlist/ToggleWishlist/${user_id}/${book_id}
+
+Set access token in Header
+    [Arguments]     ${token}
+    Set Headers     {"Authorization": "Bearer ${token}"}

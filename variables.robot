@@ -4,6 +4,7 @@ ${book_cart_base}        https://bookcart.azurewebsites.net/api
 ${user_name_not}         not_zzz
 ${user_name_new}         ralutest
 ${user_id}               1920
+${token}                 %{BOOK_CART_TOKEN}
 
 &{user_body}             userId=${0}
 ...                      firstName=${first_name_new}
