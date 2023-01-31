@@ -31,6 +31,12 @@ pip install --upgrade RESTinstance
 robot -A robotargs.txt -i <tag from test(s)> tests
 ```
 
+# Results
+
+## BookCart API
+
+![BookCartAPI-test-results](/screenshots_results/book_cart_api_tests_results.PNG "BookCartAPI-test-results")
+
 # APIs used
 
 ## REST
