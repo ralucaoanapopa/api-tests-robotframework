@@ -39,6 +39,15 @@ ${add_title}             The Dispossessed: An Ambiguous Utopia
 ${add_author}            Ursula K. Le Guin
 ${add_genre}             fiction
 ${search_added_book}     Dispossessed
+${year_string}           1994
 
 &{update_book_body}      checkedOut=${True}
 
+${error_required_title}
+...    request.body should have required property 'title'
+${error_type_year_published}
+...    request.body.yearPublished should be integer
+${error_unexisting_id}
+...    Book with id: 'unexisting' not found
+${error_type_checked_out}
+...    request.body.checkedOut should be boolean

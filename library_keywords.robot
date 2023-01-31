@@ -43,3 +43,8 @@ Update one book
 Remove one book
     [Arguments]    ${id}
     DELETE    ${library_base}/books/${id}
+
+Verify error handling
+    [Arguments]    ${message}
+    String      response body status             error
+    String      response body message            ${message}
