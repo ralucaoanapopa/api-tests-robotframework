@@ -37,14 +37,21 @@ robot -A robotargs.txt -i <tag from test(s)> tests
 
 ![BookCartAPI-test-results](/screenshots_results/book_cart_api_tests_results.PNG "BookCartAPI-test-results")
 
+## Library API
+
+![LibraryAPI-test-results](/screenshots_results/library_api_tests_results.PNG "LibraryAPI-test-results")
+
 # APIs used
 
 ## REST
-- [BookCart API](https://bookcart.azurewebsites.net/swagger/index.html)
+
+#### [BookCart API](https://bookcart.azurewebsites.net/swagger/index.html)
 
 Obtain token (which is available for 1h):
 - register user on [web app](https://bookcart.azurewebsites.net/)
 - login with user and check response (it contains the token)
+
+#### [Library API](https://glitch.com/edit/#!/postman-library-api?path=README.md)
 
 # Tools
 
