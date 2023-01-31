@@ -27,3 +27,19 @@ Loop over a list of items and verify property has expected value
     FOR    ${element}    IN    @{list}
         Should Be Equal    ${element['${property_to_check}']}     ${value_to_check}
     END
+
+Read one book
+    [Arguments]    ${id}
+    GET    ${library_base}/books/${id}
+
+Create one book
+    [Arguments]    ${body}
+    POST    ${library_base}/books    ${body}
+
+Update one book
+    [Arguments]    ${id}    ${body}
+    PATCH    ${library_base}/books/${id}    ${body}
+
+Remove one book
+    [Arguments]    ${id}
+    DELETE    ${library_base}/books/${id}

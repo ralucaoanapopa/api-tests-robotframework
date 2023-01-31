@@ -27,3 +27,18 @@ ${genre_q}               ?genre=
 ${borges}                borges
 ${author_borges}         Jorge Luis Borges
 ${title_borges}          Ficciones
+${title_hosseini}        A Thousand Splendid Suns
+${author_hosseini}       Khaled Hosseini
+
+&{add_book_body}         title=${add_title}
+...                      author=${add_author}
+...                      genre=${add_genre}
+...                      yearPublished=${1994}
+
+${add_title}             The Dispossessed: An Ambiguous Utopia
+${add_author}            Ursula K. Le Guin
+${add_genre}             fiction
+${search_added_book}     Dispossessed
+
+&{update_book_body}      checkedOut=${True}
+
