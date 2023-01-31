@@ -107,3 +107,39 @@ DELETE /Wishlist/{user_id}, 200, when clear wishlist for a specific user
     Integer     response status                  200
     Integer     response body                    0
 
+GET /ShoppingCart/{user_id}, 200, when list items from shopping cart for a user
+    [Tags]    shopping
+    List shopping cart for a user    ${user_id}
+    Integer     response status                  200
+    Array       response body                    minItems=0    maxItems=0
+
+POST /ShoppingCart/AddToCart/{user_id}/{book_id}, 200, when user adds book in shopping cart
+    [Tags]    shopping
+    Add book in shopping cart    ${user_id}    ${book_id}
+    Integer     response status                  200
+    Integer     response body                    1
+    
+    [Teardown]    Run Keyword If Test Passed
+    ...    Remove book from shopping cart        ${user_id}    ${book_id}
+
+Can add multiple books in shopping cart, increase quantity and clear all items from shopping cart
+    [Tags]    shopping
+    Add book in shopping cart    ${user_id}    ${book_id}
+    Integer     response status                  200
+    Integer     response body                    1
+
+    Add book in shopping cart    ${user_id}    ${book_id_second}
+    Integer     response status                  200
+    Integer     response body                    2
+
+    Add book in shopping cart    ${user_id}    ${book_id}
+    Integer     response status                  200
+    Integer     response body                    3
+
+    Reduce quantity with 1 for a book    ${user_id}    ${book_id}
+    Integer     response status                  200
+    Integer     response body                    2
+
+    Clear shopping cart for a user    ${user_id}
+    Integer     response status                  200
+    Integer     response body                    0

@@ -3,6 +3,11 @@ Resource        variables.robot
 Library         REST
 
 *** Keywords ***
+
+Set access token in Header
+    [Arguments]     ${token}
+    Set Headers     {"Authorization": "Bearer ${token}"}
+
 # ============ Book ==============
 Setup before running Suite
     [Documentation]    List all book then set as suite variables a set of book details
@@ -11,6 +16,7 @@ Setup before running Suite
     Set Suite Variable      ${book_title}     ${resp['body'][13]['title']}
     Set Suite Variable      ${book_author}     ${resp['body'][13]['author']}
     Set Suite Variable      ${book_category}     ${resp['body'][13]['category']}
+    Set Suite Variable      ${book_id_second}     ${resp['body'][17]['bookId']}
 
 List all books
     ${resp}    GET    ${book_cart_base}/Book
@@ -72,11 +78,30 @@ Toggle item to wishlist
     Set access token in Header    ${token}
     POST    ${book_cart_base}/Wishlist/ToggleWishlist/${user_id}/${book_id}
 
-Set access token in Header
-    [Arguments]     ${token}
-    Set Headers     {"Authorization": "Bearer ${token}"}
-
 Clear wishlist for a user
     [Arguments]    ${id}
     Set access token in Header    ${token}
     DELETE    ${book_cart_base}/Wishlist/${id}
+
+# ============ Shopping Cart ==============
+List shopping cart for a user
+    [Arguments]    ${id}
+    GET    ${book_cart_base}/ShoppingCart/${id}
+
+Add book in shopping cart
+    [Arguments]    ${user_id}    ${book_id}
+    POST    ${book_cart_base}/ShoppingCart/AddToCart/${user_id}/${book_id}
+
+Remove book from shopping cart
+    [Arguments]    ${user_id}    ${book_id}
+    DELETE    ${book_cart_base}/ShoppingCart/${user_id}/${book_id}
+    Integer     response status                  200
+
+Reduce quantity with 1 for a book
+    [Arguments]    ${user_id}    ${book_id}
+    PUT    ${book_cart_base}/ShoppingCart/${user_id}/${book_id}
+
+Clear shopping cart for a user
+    [Arguments]    ${user_id}
+    DELETE    ${book_cart_base}/ShoppingCart/${user_id}
+    Integer     response status                  200
