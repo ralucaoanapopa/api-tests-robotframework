@@ -17,3 +17,13 @@ ${first_name_new}        Ralu
 ${last_name_new}         Test API
 ${password_new}          Letmetest2@23
 ${F}                     F
+
+# ============ Library API ==============
+${library_base}          https://postman-library-api.glitch.me
+${search_q}              ?search=
+${checked_out_q}         ?checkedOut=
+${genre_q}               ?genre=
+
+${borges}                borges
+${author_borges}         Jorge Luis Borges
+${title_borges}          Ficciones
