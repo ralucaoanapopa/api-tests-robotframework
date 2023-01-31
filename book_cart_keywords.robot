@@ -75,3 +75,8 @@ Toggle item to wishlist
 Set access token in Header
     [Arguments]     ${token}
     Set Headers     {"Authorization": "Bearer ${token}"}
+
+Clear wishlist for a user
+    [Arguments]    ${id}
+    Set access token in Header    ${token}
+    DELETE    ${book_cart_base}/Wishlist/${id}

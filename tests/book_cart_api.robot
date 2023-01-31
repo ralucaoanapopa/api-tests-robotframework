@@ -89,3 +89,21 @@ POST /Wishlist/ToggleWishlist/{user_id}/{book_id}, 200, when toggle item (add it
     String      response body 0 category         ${book_category}
     [Teardown]    Run Keyword If Test Passed
     ...    Toggle item to wishlist    ${user_id}    ${book_id}
+    
+DELETE /Wishlist/{user_id}, 200, when clear wishlist for a specific user
+    [Tags]    wishlist
+    [Documentation]    Toggle item in order to add to wishlist
+    ...                Check that item is returned from wishlist
+    ...                Clear wishlist for that user
+    Toggle item to wishlist    ${user_id}    ${book_id}
+    Output
+    Integer     response status                  200
+
+    List wishlist for a user    ${user_id}
+    Integer     response status                  200
+    Array       response body                    minItems=1    maxItems=1
+
+    Clear wishlist for a user    ${user_id}
+    Integer     response status                  200
+    Integer     response body                    0
+
